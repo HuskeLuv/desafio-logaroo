@@ -3,15 +3,24 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Services\Post\PostService;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
+use App\Traits\HttpRequest;
+use Exception;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(
+        protected PostService $postService
+    ){}
+
+    use HttpResponses;
+    use HttpRequest;
+
     public function index(Request $request)
     {
         if(!$request->input()){
@@ -22,12 +31,16 @@ class PostController extends Controller
         return Post::where('tags', 'LIKE','%'.$tags.'%')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        try {
+            $data = $request->only('title', 'author', 'content', 'tags');
+            $post = $this->postService->create($data);
+            return $this->success('PostCreated Successfuly', 201, [$post]);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
+
     }
 
     /**
