@@ -15,6 +15,16 @@ class AuthController extends Controller
         protected AuthService $authService
     ){}
 
+    public function register(RegistrationRequest $request){
+        try {
+            $userData = $request->only('name', 'email', 'password');
+            $user = $this->authService->register($userData);
+            return $user;
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
+    }
+
     public function login(LoginRequest $request): JsonResponse {
         try {
             $credentials = $request->only('email', 'password');

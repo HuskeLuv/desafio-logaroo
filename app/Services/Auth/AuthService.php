@@ -2,9 +2,16 @@
 
 namespace App\Services\Auth;
 
+use App\Models\User;
 use Exception;
 
 class AuthService {
+  public function register(array $userData): User {
+    if(!$user = User::create($userData)){
+      throw new Exception('Unable to create User');
+    }
+    return $user;
+  }
 
   public function login(array $credentials){
     if(!$token = auth()->attempt($credentials)){ 
