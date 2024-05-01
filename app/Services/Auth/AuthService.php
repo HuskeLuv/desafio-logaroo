@@ -2,15 +2,23 @@
 
 namespace App\Services\Auth;
 
+use Exception;
+
 class AuthService {
+
   public function login(array $credentials){
     if(!$token = auth()->attempt($credentials)){ 
-    return response()->json(['error' => 'Unauthorized'], 401);
+      throw new Exception('Unauthorized');
     }    
-    return response()->json([
-        'acess_token' => $token,
-        'token_type' => 'bearer',
-        'expires_in' => auth()->factory()->getTTL() * 60
-      ]);
+    return $this->respondWithToken($token);
   }
+
+  protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
+    }
 }
