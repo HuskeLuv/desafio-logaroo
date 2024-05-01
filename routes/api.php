@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (){
@@ -13,4 +13,8 @@ Route::prefix('auth')->group(function (){
   Route::post('login', [AuthController::class, 'login']);
   Route::get('me', [AuthController::class, 'me']);
   Route::post('logout', [AuthController::class, 'logout']);
+});
+
+Route::prefix('posts')->group(function() {
+  Route::get('', [PostController::class, 'index']);
 });
