@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\PostRepositoryInterface;
+use App\Repositories\PostEloquentORM;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(PostRepositoryInterface::class, PostEloquentORM::class);
     }
 
     /**
@@ -19,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+    
     }
 }

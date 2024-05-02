@@ -18,4 +18,5 @@ Route::prefix('auth')->group(function (){
 Route::prefix('posts')->group(function() {
   Route::get('/', [PostController::class, 'index']);
   Route::post('/',[PostController::class, 'store']);
+  Route::put('posts/{post}',[PostController::class, 'update']);
 });
