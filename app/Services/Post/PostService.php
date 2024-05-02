@@ -7,7 +7,6 @@ use App\DTO\UpdatePostDTO;
 use App\Models\Post;
 use App\Repositories\PostRepositoryInterface;
 use App\Traits\HttpRequest;
-use Exception;
 use stdClass;
 
 class PostService{
@@ -19,7 +18,7 @@ class PostService{
 
   use HttpRequest;
 
-  public function getAll(string $filter = null): array {
+  public function getAll(string $filter): array {
     return $this->repository->getAll($filter);
   }
 
@@ -31,12 +30,11 @@ class PostService{
     return $this->repository->create($dto);
   }
 
-  public function update (UpdatePostDTO $dto): stdClass
-    {
+  public function update (UpdatePostDTO $dto): stdClass{
       return $this->repository->update($dto);
-    }
+  }
     
-    public function delete(string $id): void {
-      $this->repository->delete($id);
-    }
+  public function delete(string $id): void {
+    $this->repository->delete($id);
+  }
 }

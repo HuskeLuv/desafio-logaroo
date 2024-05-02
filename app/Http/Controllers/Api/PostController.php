@@ -21,43 +21,41 @@ class PostController extends Controller
     use HttpResponses;
     use HttpRequest;
 
-    public function index(Request $request)
-    {
+    public function index(Request $request){
         try {
-            $post = $this->service->getAll($request);
+            $filter = $request->input('tag', '');
+            $post = $this->service->getAll($filter);
             return $post;
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
     }
 
-    public function store(PostRequest $request)
-    {
+    public function store(PostRequest $request){
         try {
             $post = $this->service->create(CreatePostDTO::makeFromRequest($request));
             return $this->success('PostCreated Successfuly', 201, [$post]);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
-
     }
 
-    public function update(PostRequest $request)
-    {
+    public function update(PostRequest $request, $id){
         try {
+            $request->merge(['id' => $id]);
             $post = $this->service->update(UpdatePostDTO::makeFromRequest($request));
-            return $this->success('Post Updated Successfuly', 201, [$post]);
+            return $this->success('Post Updated Successfuly', 200, [$post]);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(string $id){
+        try {
+            $this->service->delete($id);
+            return $this->success('No Content', 204);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
     }
 }
