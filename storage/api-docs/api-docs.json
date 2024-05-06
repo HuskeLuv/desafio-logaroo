@@ -1,0 +1,104 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Desafio Logaroo",
+        "description": "Documentação da API criada para o Desafio de backend developer da empresa Logaroo",
+        "contact": {
+            "name": "Wellington Santos",
+            "email": "huske.xp@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "JWT Authentication"
+                ],
+                "summary": "Registra um novo usuário",
+                "description": "Esse endpoint registra um novo usuário",
+                "operationId": "8e4e3cb7b46126f4696379d3c7eeb4ad",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "name",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nome do Usuário",
+                                        "type": "string",
+                                        "example": "Exemplo Teste"
+                                    },
+                                    "email": {
+                                        "description": "Email do Usuário",
+                                        "type": "string",
+                                        "example": "teste@example.org"
+                                    },
+                                    "password": {
+                                        "description": "Senha do Usuário",
+                                        "type": "string",
+                                        "example": "#sdasdssdaAA@"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "Confirmação da senha do Usuário",
+                                        "type": "string",
+                                        "example": "#sdasdssdaAA@"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário Cadastrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Usuário Cadastrado com sucesso"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Campos Incorretos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Esse email já foi cadastrado"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
