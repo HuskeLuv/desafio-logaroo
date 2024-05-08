@@ -56,7 +56,7 @@ class AuthController extends Controller
         ),
         responses: [
             new OA\Response(
-                response: "200",
+                response: "201",
                 description: "Usuário Cadastrado",
                 content: new OA\MediaType(
                     mediaType: "application/json",
