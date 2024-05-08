@@ -57,7 +57,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Usuário Cadastrado",
                         "content": {
                             "application/json": {
@@ -301,6 +301,416 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Os dados enviados estão incorretos"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Retorna informações de todos os posts cadastrados",
+                "description": "Esse endpoint retorna todas as informações de todos os posts cadastrados",
+                "operationId": "3fda362e2e082b5357ac416e7767e435",
+                "responses": {
+                    "200": {
+                        "description": "Informações sobre posts cadastrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Exemplo Título"
+                                        },
+                                        "author": {
+                                            "type": "string",
+                                            "example": "Jett Hilpert"
+                                        },
+                                        "content": {
+                                            "type": "string",
+                                            "example": "Local app manager. Start apps within your browser, developer tool with local"
+                                        },
+                                        "tags": {
+                                            "type": "string",
+                                            "example": "node,organizing,webapps,domain,developer,https,proxy"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2024-04-29T20:52:17.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2024-04-29T20:52:17.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Credenciais  incorretas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "As credenciais enviadas estão incorretas"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "Usuário não autorizado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Registra um novo post",
+                "description": "Esse endpoint registra um novo post",
+                "operationId": "dcb66200c3132996151884ac232cf439",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author",
+                                    "content",
+                                    "tags"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Exemplo Título"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Jett Hilpert"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Local app manager. Start apps within your browser, developer tool with local"
+                                    },
+                                    "tags": {
+                                        "type": "string",
+                                        "example": [
+                                            "framework",
+                                            "node",
+                                            "http2",
+                                            "https",
+                                            "localhost"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Post Criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Exemplo Título"
+                                        },
+                                        "author": {
+                                            "type": "string",
+                                            "example": "Jett Hilpert"
+                                        },
+                                        "content": {
+                                            "type": "string",
+                                            "example": "Local app manager. Start apps within your browser, developer tool with local"
+                                        },
+                                        "tags": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "framework"
+                                            },
+                                            "example": [
+                                                "framework",
+                                                "node",
+                                                "http2",
+                                                "https",
+                                                "localhost"
+                                            ]
+                                        },
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Campos Incorretos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "O campo author é obrigatório"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/posts/{post}": {
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Edita um post",
+                "description": "Esse endpoint edita um post existente",
+                "operationId": "fc17b67462ad71a7f4b287520462fd02",
+                "parameters": [
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "description": "ID do post a ser editado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author",
+                                    "content",
+                                    "tags"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Exemplo Título"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Jett Hilpert"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Local app manager. Start apps within your browser, developer tool with local"
+                                    },
+                                    "tags": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "framework"
+                                        },
+                                        "example": [
+                                            "framework",
+                                            "node",
+                                            "http2",
+                                            "https",
+                                            "localhost"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post Criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Exemplo Título"
+                                        },
+                                        "author": {
+                                            "type": "string",
+                                            "example": "Jett Hilpert"
+                                        },
+                                        "content": {
+                                            "type": "string",
+                                            "example": "Local app manager. Start apps within your browser, developer tool with local"
+                                        },
+                                        "tags": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "framework"
+                                            },
+                                            "example": [
+                                                "framework",
+                                                "node",
+                                                "http2",
+                                                "https",
+                                                "localhost"
+                                            ]
+                                        },
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Campos Incorretos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "O campo author é obrigatório"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Deleta um post",
+                "description": "Esse endpoint apaga as informações do post indicado",
+                "operationId": "f0dcb391948b9589ee732a26a68e17c7",
+                "parameters": [
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "description": "ID do post a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Post removido com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Post removido com sucesso"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não Autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dados enviados incorretos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "O post indicado não existe"
                                         },
                                         "errors": {
                                             "type": "string",
