@@ -30,6 +30,14 @@ class PostController extends Controller
         security: [
             ["bearer" => []]
         ],
+        parameters: [
+            new OA\Parameter(
+                name: "tag",
+                in: "query",
+                description: "Filtrar posts por tags (separadas por vírgula)",
+                schema: new OA\Schema(type: "string")
+            )
+        ],
         responses: [
             new OA\Response(
                 response: "200",

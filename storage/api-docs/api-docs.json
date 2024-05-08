@@ -328,6 +328,16 @@
                 "summary": "Retorna informações de todos os posts cadastrados",
                 "description": "Esse endpoint retorna todas as informações de todos os posts cadastrados",
                 "operationId": "3fda362e2e082b5357ac416e7767e435",
+                "parameters": [
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "description": "Filtrar posts por tags (separadas por vírgula)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Informações sobre posts cadastrados",
